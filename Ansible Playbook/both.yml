@@ -1,0 +1,95 @@
+- hosts: ubuntu_server:linux_server
+  become: true
+  tasks:
+  - name: install apache on both ubuntu and centos
+    package:
+      name:
+        - "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' if ansible_distribution == 'ec2-user' }}"
+      state: present
+      update_cache: yes
+
+- hosts: ubuntu_server
+  tasks:
+  - name: start apache service on ubuntu
+    service:
+      name: apache2
+      state: started
+
+- hosts: linux_server
+  tasks:
+  - name: start httpd service on centos
+    ansible.builtin.service:
+      name: httpd
+      state: started
+
+- hosts: ubuntu_server:linux_server
+  become: true
+  tasks:
+  - name: copy a default html page
+    copy:
+      content: |
+          <html>
+          <head>
+          <title>Welcome to My Website</title>
+          </head>
+          <body>
+          <h1>Hello from Ansible!</h1>
+          </body>
+          </html>
+      dest: /var/www/html/index.html
+
+
+
+# ---
+# - name: Package Installation on different Operating Systems
+#   hosts: all
+#   become: true
+
+  # tasks:
+  # - name: Install Apache on both Ubuntu and CentOS Servers
+  #   package:
+  #     name:
+  #       - "{{apache_package}}"
+  #       - "{{httpd_package}}"
+  #     state: latest
+  #     update_cache: yes  
+
+# ---
+# - name: Install Apache
+#   hosts: all
+#   become: true
+#   tasks:
+#     - name: Install Apache
+#       package:
+#         name:
+#           - "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+#       state: latest
+#       service: 
+#         state: started
+        
+# - name: Copy and deploy default HTML page
+#    hosts: ubuntu_server:centos_server
+#    become: true
+#    tasks:
+#      - name: Copy HTML page
+#        copy:
+#          src: path/to/default.html
+#          dest: /var/www/html/index.html  
+
+  # - name: Install Apache2
+  #   apt:
+  #     name: apache2
+  #     state: latest
+  #     update_cache: yes
+  #   when: ansible_distribution == "Ubuntu"
+
+  # - name: Install Httpd
+  #   dpkg:
+  #     name: httpd
+  #     state: latest
+  #     update_cache: yes
+  #     enabled: yes
+  #   when: ansible_distribution == "CentOS"
+
+
+

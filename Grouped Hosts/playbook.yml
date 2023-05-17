@@ -1,0 +1,39 @@
+- hosts: webserver
+  become: true
+  tasks:
+  - name: install nginx on webserver
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+  - name: ensure nginx is started
+    service:
+      name: nginx
+      state: started
+
+- hosts: centos
+  become: true
+  tasks:
+  - name: install apache(httpd) on centos
+    yum:
+      name: httpd
+      state: latest
+      update_cache: yes
+
+  - name: ensure httpd service is started
+    ansible.builtin.service:
+      name: httpd
+      state: started
+
+- hosts: parent
+  become: true
+  tasks:
+  - name: update webserver
+    raw: sudo apt update
+    when: ansible_distribution == 'Ubuntu'
+    when: inventory_hostname in groups["webserver"]
+
+  - name: update centos
+    raw: sudo yum update
+    when: ansible_os_family == "ec2-user"
+    when: inventory_hostname in groups["centos"]     

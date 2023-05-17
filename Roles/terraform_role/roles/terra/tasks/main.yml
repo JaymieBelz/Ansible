@@ -1,0 +1,27 @@
+---
+- name: Install unzip
+  apt:
+    name: unzip
+    state: present
+
+- name: Download Terraform binary
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/0.15.5/terraform_0.15.5_linux_amd64.zip"
+    dest: "/tmp/terraform.zip"
+    mode: '0755'
+
+- name: Unzip Terraform binary
+  unarchive:
+    src: "/tmp/terraform.zip"
+    dest: "/usr/local/bin"
+    remote_src: yes
+    mode: '0755'
+
+- name: Add Terraform to PATH
+  lineinfile:
+    path: "~/.bashrc"
+    line: 'export PATH=$PATH:/usr/local/bin'
+    create: yes
+    state: present
+  become: true
+  become_user: "{{ ansible_user }}"

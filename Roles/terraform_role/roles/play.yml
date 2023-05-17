@@ -1,0 +1,6 @@
+---
+- name: install and configure terraform
+  hosts: all
+  become: true
+  roles:
+     - terra

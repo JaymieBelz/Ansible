@@ -1,0 +1,15 @@
+# located in /etc/ansible/hosts directory
+[webserver]
+44.211.153.206
+18.233.154.138
+54.161.207.64
+
+[centos]
+linux ansible_host=54.160.184.6 ansible_user=ec2-user
+
+[parent]
+44.211.153.206
+18.233.154.138
+54.161.207.64
+linux ansible_host=54.160.184.6 ansible_user=ec2-user
+

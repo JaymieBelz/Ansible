@@ -1,0 +1,47 @@
+---
+- name: Install Docker dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: present
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+
+- name: Pull Ubuntu Docker image
+  docker_image:
+    name: ubuntu
+    source: pull
+
+- name: Run Ubuntu container
+  docker_container:
+    name: my_ubuntu_container
+    image: ubuntu
+    state: started
+    detach: yes
+
+# tasks file for docker_install

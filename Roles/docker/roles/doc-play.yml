@@ -1,0 +1,6 @@
+---
+- name: install docker and run ubuntu container
+  hosts: all
+  become: true
+  roles:
+    - docker_install

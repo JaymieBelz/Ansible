@@ -1,0 +1,7 @@
+---
+- name: Install and configure Apache
+  hosts: all
+  become: true
+  roles:
+    - apache_install
+    - apache_copy

@@ -1,0 +1,5 @@
+---
+- name: Copy default HTML page
+  copy:
+    src: /home/ubuntu/ansible_roles/ranjay/apache_copy/default.html
+    dest: /var/www/html/index.html

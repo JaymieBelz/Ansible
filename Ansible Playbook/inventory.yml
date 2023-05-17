@@ -1,0 +1,6 @@
+[ubuntu_server]
+ubuntu ansible_host=44.211.153.206 ansible_user=ubuntu
+        
+
+[linux_server]
+linux ansible_host=54.160.184.6 ansible_user=ec2-user

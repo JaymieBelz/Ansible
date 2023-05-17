@@ -1,0 +1,8 @@
+---
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+  notify: Restart Apache
+
+# tasks file for apache
