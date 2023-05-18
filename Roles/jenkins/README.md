@@ -1,4 +1,4 @@
-## ** How to Install Jenkins; Start its Service and Open a Firewal - Using Ansible**
+## **How to Install Jenkins; Start its Service and Open a Firewal - Using Ansible**
 
 
 In this section, we shall be configuring a couple of stuff to a remote server. Which is Jenkins and Firewall Setting.
