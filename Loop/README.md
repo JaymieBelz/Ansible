@@ -6,7 +6,23 @@ In this section, we will be creating users on a target machine by simply running
 
 <br>
 
-In this module, we will create 4 different users on a target server[54.174.173.107] by running the anslible loop module  
+## Install Ansible on Control Machine
+In this machine (master-ubuntu instance launched on AWS), we shall install ansible. The ansible package repository first before installation.
+
+      sudo apt-get-repository ppa:ansible/ansible
+
+      sudo apt update           
+
+      sudo apt upgrade -y
+
+Then install ansible
+
+      sudo apt install ansible -y
+
+<br>
+
+## Write Ansible Loop Configurations
+With this module, we will create 4 different users on a target server[54.174.173.107] by running the anslible loop module.
 
 On our master-ubuntu; in the workstation user, create a new directory and name it 'user-creation'
 
@@ -45,6 +61,10 @@ Then input this in the 'main.yml' file
 
 ![user](./images/Screenshot%20(380).png)
 
+Press 'Ctrl O', ENTER, and then 'Ctrl X' to save and exit the file.
+
+<br>
+
 Now, go back into the roles directory, let's create our playbook.
 
          cd ~/user-creation/roles/
@@ -61,14 +81,37 @@ Then paste this into the playbook file;
 
 ![user](./images/Screenshot%20(378).png)
 
+Press 'Ctrl O', ENTER, and then 'Ctrl X' to save and exit the file.
+
+<br>
+
 In this same '~/user-creation/roles/' directory, we will create our ansible.cfg and Myapp-key-pair.pem files
 
+        sudo nano Myapp-key-pair
+
+Then paste your SSH key-pair(login) like this;
+
+![ssh](./images/Screenshot%20(185).png)
+
+Press 'Ctrl O', ENTER, and then 'Ctrl X' to save and exit the file.
+
+<br>
+
+Then "ansible.cfg file"
+
         sudo nano ansible.cfg
+
+        (paste this)                
+        [defaults]
+        inventory = /etc/ansible/hosts
+        remote_user = ubuntu
+        private_key_file = /home/ubuntu/user-creation/roles/Myapp-key-pair.pem
 
 This is what it should contain;
 
 ![user](./images/Screenshot%20(376).png)
 
+<br>
 
 Now, before running our playbook, let us configure our inventory file as refrenced in the 'ansible.cfg' file.
 
@@ -78,15 +121,21 @@ Then paste this
 
         ubuntu ansible_host=54.174.173.107
 
+Press 'Ctrl O', ENTER, and then 'Ctrl X' to save and exit the file.
+
+<br>
+
 Now let's run our playbook.
 
         sudo ansible -i /etc/ansible/hosts user-play.yml
 
 ![user](./images/Screenshot%20(379).png)
 
+Press 'Ctrl O', ENTER, and then 'Ctrl X' to save and exit the file.
+
 <br>
 
-Gladly, we have successfully created 4 users on our target machine using ansible loop. Cheers! We did it.
+Successfully, we have created 4 users on our target machine using ansible loop. Cheers! We made it!
 
       
 
