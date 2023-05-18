@@ -152,10 +152,10 @@ Then paste the following code in the file;
         apt:
           name: nginx
           state: latest
-         update_cache: yes
+          update_cache: yes
       - name: ensure nginx is started
         service:
-         name: nginx
+          name: nginx
           state: started
 
     - hosts: centos
@@ -164,8 +164,8 @@ Then paste the following code in the file;
       - name: install apache(httpd) on centos
         yum:
           name: httpd
-         state: latest
-         update_cache: yes
+          state: latest
+          update_cache: yes
 
       - name: ensure httpd service is started
         ansible.builtin.service:
