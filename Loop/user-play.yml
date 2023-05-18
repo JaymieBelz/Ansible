@@ -1,0 +1,6 @@
+---
+- name: create users
+  hosts: all
+  become: true
+  roles:
+    - create-users

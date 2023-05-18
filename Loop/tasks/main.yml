@@ -1,9 +1,11 @@
 ---
 - name: Create users
-  ansible.builtin.user:
-    name: "{{ item.name }}"
-    password: "{{ item.password | password_hash('sha512') }}"
-    groups: "{{ item.groups }}"
+  user:
+    name: "{{ item }}"
     state: present
-  loop: "{{ users }}"
+  loop:
+    - james
+    - amaka
+    - joy
+    - cloudtopg
 
