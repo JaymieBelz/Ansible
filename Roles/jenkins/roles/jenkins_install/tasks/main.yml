@@ -1,0 +1,37 @@
+---
+- name: Add Jenkins repository key
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    state: present
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: deb https://pkg.jenkins.io/debian-stable binary/
+    state: present
+
+- name: Install Java
+  apt:
+    name: openjdk-11-jdk
+    state: latest
+
+- name: update apt cache
+  apt:
+   update_cache: yes
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: latest
+    update_cache: yes
+
+- name: Start Jenkins service
+  service:
+    name: jenkins
+    enabled: yes
+    state: started
+
+- name: open port 8080 in firewall
+  ufw:
+    rule: allow
+    port: 8080
+    state: enabled

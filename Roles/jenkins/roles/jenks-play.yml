@@ -1,0 +1,6 @@
+---
+- name: install jenkins and open port 8080
+  hosts: all
+  become: true
+  roles:
+    - jenkins_install
