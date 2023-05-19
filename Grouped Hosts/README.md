@@ -3,7 +3,7 @@
 <br>
 
 Yet another series we have here on Ansible! Welcome, dear reader.
-This article will basically teach you how to run ansible configurations to diferent ansible groups that consists of a number of hosts. We will simply classify host IP addresses into several groups and run ansible tasks on them as a group of hosts.
+This article will basically teach you how to run ansible configurations on different ansible groups that consists of a number of hosts. We will simply classify host IP addresses into several groups and run ansible tasks on them as a group of hosts. In this series, we shall install and start apache service and nginx service on a group of 3 Ubuntu host machines and a group of 1 CentOS host machine respectively. Then on the group of groups, we shall update the groups of all the hosts IPs.
 
 <br>
 
