@@ -193,7 +193,7 @@ Right in this directory "~/ansble-roles/ranjay", we can edit our inventory file 
 ## Write SSH key pair file
 SSH Key pair ensures there's a secure shell connection between our infrastructures (control and target machines). Note that when creating instances on AWS, you will be required to create/choose an existing a key pair (which must be downloaded to your computer after creation for future use) before you can launch an instance. And for the purpose this practice, I used the same key pair(login) - named "Myapp-key-pair" on AWS - to launch 2 instances. This key pair, I have downloaded and saved somewhere in my Private Computer because I will be needing it at this very stage. 
 
-        sudo nano Myapp-key-pair.yml
+        sudo nano Myapp-key-pair.pem
 
 Then paste your own SSH key-pair(login) like I just did;
 
