@@ -177,12 +177,10 @@ Then paste the following code in the file;
       tasks:
       - name: update webserver
         raw: sudo apt update
-        when: ansible_distribution == 'Ubuntu'
         when: inventory_hostname in groups["webserver"]
  
       - name: update centos
         raw: sudo yum update
-        when: ansible_os_family == "ec2-user"
         when: inventory_hostname in groups["centos"]     
 
 At the end, this is what your playbook should look like;        
